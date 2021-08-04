@@ -17,7 +17,7 @@ jobs:
         popd
     - name: Download ASIOSDK
       run: |
-        curl https://www.steinberg.net/asiosdk
+        Invoke-WebRequest -Uri https://www.steinberg.net/asiosdk -MaximumRedirection 0
         unzip asiosdk
     - name: Build libopenshot-audio
       run: |
