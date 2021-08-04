@@ -15,6 +15,10 @@ jobs:
         cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64
         cmake --build . --config Debug
         popd
+    - name: Download ASIOSDK
+      run: |
+        wget https://www.steinberg.net/asiosdk
+        unzip asiosdk
     - name: Build libopenshot-audio
       run: |
         mkdir build
