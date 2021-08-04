@@ -12,7 +12,7 @@ jobs:
       run: |
         Invoke-WebRequest -Uri https://www.steinberg.net/asiosdk -MaximumRedirection 5 -OutFile asiosdk.zip
         unzip asiosdk.zip
-        dir
+        move asiosdk* asiosdk
     - name: Compile ZLIB
       run: |
         git clone https://github.com/madler/zlib
@@ -24,7 +24,7 @@ jobs:
       run: |
         mkdir build
         pushd build
-        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" -DZLIB_INCLUDE_DIR="..\zlib" -DZLIB_LIBRARY="..\zlib\build\Debug\zlib.lib"
+        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" -DZLIB_INCLUDE_DIR="..\zlib" -DZLIB_LIBRARY="..\zlib\build\Debug\zlib.lib" -DDASIO_SDK_DIR="..\asiosdk\common"
         cmake --build . --config Debug
         popd
 
