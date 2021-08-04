@@ -13,6 +13,8 @@ jobs:
         Invoke-WebRequest -Uri https://www.steinberg.net/asiosdk -MaximumRedirection 5 -OutFile asiosdk.zip
         unzip asiosdk.zip
         move asiosdk* asiosdk
+        dir
+        dir asiosdk/
     - name: Compile ZLIB
       run: |
         git clone https://github.com/madler/zlib
