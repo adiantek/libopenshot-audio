@@ -23,11 +23,6 @@
 namespace juce
 {
 
-#if JUCE_MSVC
- #pragma intrinsic (__cpuid)
- #pragma intrinsic (__rdtsc)
-#endif
-
 void Logger::outputDebugString (const String& text)
 {
     OutputDebugString ((text + "\n").toWideCharPointer());
@@ -60,11 +55,7 @@ static void callCPUID (int result[4], uint32 type)
 #else
 static void callCPUID (int result[4], int infoType)
 {
-   #if JUCE_PROJUCER_LIVE_BUILD
-    std::fill (result, result + 4, 0);
-   #else
-    __cpuid (result, infoType);
-   #endif
+  std::fill (result, result + 4, 0);
 }
 #endif
 
@@ -406,29 +397,7 @@ double Time::getMillisecondCounterHiRes() noexcept       { return hiResCounterHa
 //==============================================================================
 static int64 juce_getClockCycleCounter() noexcept
 {
-   #if JUCE_MSVC
-    // MS intrinsics version...
-    return (int64) __rdtsc();
-
-   #elif JUCE_GCC || JUCE_CLANG
-    // GNU inline asm version...
-    unsigned int hi = 0, lo = 0;
-
-    __asm__ __volatile__ (
-        "xor %%eax, %%eax               \n\
-         xor %%edx, %%edx               \n\
-         rdtsc                          \n\
-         movl %%eax, %[lo]              \n\
-         movl %%edx, %[hi]"
-         :
-         : [hi] "m" (hi),
-           [lo] "m" (lo)
-         : "cc", "eax", "ebx", "ecx", "edx", "memory");
-
-    return (int64) ((((uint64) hi) << 32) | lo);
-   #else
-    #error "unknown compiler?"
-   #endif
+    return 0;
 }
 
 int SystemStats::getCpuSpeedInMegahertz()
