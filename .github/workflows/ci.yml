@@ -19,8 +19,8 @@ jobs:
       run: |
         mkdir build
         pushd build
-        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" --config Debug -DZLIB_INCLUDE_DIR="..\zlib" -DZLIB_LIBRARY="..\zlib\build\Debug\zlib.lib"
-        cmake --build .
+        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" -DZLIB_INCLUDE_DIR="..\zlib" -DZLIB_LIBRARY="..\zlib\build\Debug\zlib.lib"
+        cmake --build . --config Debug
         popd
 
     - name: Install libopenshot-audio
