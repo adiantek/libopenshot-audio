@@ -12,15 +12,15 @@ jobs:
       run: |
         git clone https://github.com/madler/zlib
         pushd zlib
-        cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64 -DCMAKE_BUILD_TYPE="Debug"
-        cmake --build . -- VERBOSE=1
+        cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64 --config Debug
+        cmake --build .
         popd
     - name: Build libopenshot-audio
       run: |
         mkdir build
         pushd build
-        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" -DCMAKE_BUILD_TYPE="Debug"
-        cmake --build . -- VERBOSE=1
+        cmake -B . -G "Visual Studio 16 2019" -A ARM64 -S .. -DCMAKE_INSTALL_PREFIX:PATH="dist" --config Debug -DZLIB_INCLUDE_DIR="..\zlib" -DZLIB_LIBRARY="..\zlib\build\Debug\zlib.lib"
+        cmake --build .
         popd
 
     - name: Install libopenshot-audio
