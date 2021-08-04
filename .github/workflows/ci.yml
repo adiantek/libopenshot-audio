@@ -13,8 +13,11 @@ jobs:
         mkdir zlib
         pushd zlib
         git clone https://github.com/madler/zlib
-        cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64 -DCMAKE_BUILD_TYPE="Debug"
+        mkdir build
+        pushd build
+        cmake -B . -S .. -G "Visual Studio 16 2019" -A ARM64 -DCMAKE_BUILD_TYPE="Debug"
         cmake --build . -- VERBOSE=1
+        popd
         popd
     - name: Build libopenshot-audio
       run: |
