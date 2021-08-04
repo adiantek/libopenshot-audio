@@ -8,6 +8,11 @@ jobs:
         os: [windows-latest]
     steps:
     - uses: actions/checkout@v2
+    - name: Download ASIOSDK
+      run: |
+        Invoke-WebRequest -Uri https://www.steinberg.net/asiosdk -MaximumRedirection 5 -OutFile asiosdk.zip
+        unzip asiosdk.zip
+        dir
     - name: Compile ZLIB
       run: |
         git clone https://github.com/madler/zlib
@@ -15,10 +20,6 @@ jobs:
         cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64
         cmake --build . --config Debug
         popd
-    - name: Download ASIOSDK
-      run: |
-        Invoke-WebRequest -Uri https://www.steinberg.net/asiosdk -MaximumRedirection 5
-        unzip asiosdk
     - name: Build libopenshot-audio
       run: |
         mkdir build
