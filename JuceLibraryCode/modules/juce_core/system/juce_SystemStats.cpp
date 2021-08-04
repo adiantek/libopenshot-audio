@@ -137,6 +137,7 @@ bool SystemStats::hasNeon() noexcept            { return getCPUInformation().has
 String SystemStats::getStackBacktrace()
 {
     jassertfalse; // sorry, not implemented yet!
+    return (String) 0;
 }
 
 //==============================================================================
