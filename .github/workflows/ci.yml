@@ -8,7 +8,14 @@ jobs:
         os: [windows-latest]
     steps:
     - uses: actions/checkout@v2
-    
+    - name: Compile ZLIB
+      run: |
+        mkdir zlib
+        pushd zlib
+        git https://github.com/madler/zlib
+        cmake -B . -S . -G "Visual Studio 16 2019" -A ARM64 -DCMAKE_BUILD_TYPE="Debug"
+        cmake --build . -- VERBOSE=1
+        popd zlib
     - name: Build libopenshot-audio
       run: |
         mkdir build
