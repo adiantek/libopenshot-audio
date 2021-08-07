@@ -32,5 +32,5 @@ jobs:
     - name: Install libopenshot-audio
       run: |
         pushd build
-        cmake --build . --target install -- VERBOSE=1
+        cmake --build . --target install
         popd
