@@ -155,7 +155,7 @@ foreach(j_module IN LISTS JUCE_MODULES)
     JuceLibraryCode/include_${j_module}.${SOURCE_EXTENSION} )
 endforeach()
 
-add_library(openshot-audio SHARED ${JUCE_SOURCES})
+add_library(openshot-audio STATIC ${JUCE_SOURCES})
 
 # Include header directories
 target_include_directories(openshot-audio PUBLIC
