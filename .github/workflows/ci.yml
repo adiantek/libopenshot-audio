@@ -34,3 +34,10 @@ jobs:
         pushd build
         cmake --build . --target install
         popd
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: |
+          libopenshot-audio\zlib\Debug\zlibd.dll
+          build\dist\bin\openshot-audio-demo.exe
