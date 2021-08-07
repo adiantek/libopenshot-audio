@@ -39,5 +39,5 @@ jobs:
       with:
         name: artifacts
         path: |
-          libopenshot-audio\zlib\Debug\zlibd.dll
+          zlib\Debug\zlibd.dll
           build\dist\bin\openshot-audio-demo.exe
